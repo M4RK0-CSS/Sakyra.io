@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="sakysanma - um espaço para palavras, ideias e inspirações.">
+  <title>sakysanma | Blog</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --background: #faf8f4;
+      --white: #ffffff;
+      --text: #302d29;
+      --muted: #827b71;
+      --accent: #9a8066;
+      --line: #e9e3da;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.7;
+    }
+
+    header {
+      background: var(--background);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 29px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .links a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: 65px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(38px, 5vw, 58px);
+      margin: 18px 0;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 440px;
+      margin-bottom: 25px;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--text);
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      font-size: 13px;
+      border-radius: 3px;
+      transition: 0.2s;
+    }
+
+    .button:hover {
+      background: var(--accent);
+    }
+
+    .section {
+      max-width: 1100px;
+      margin: 85px auto;
+      padding: 0 24px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 34px;
+      margin-top: 8px;
+    }
+
+    .search {
+      padding: 11px 14px;
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 3px;
+      font: inherit;
+      width: 220px;
+      outline-color: var(--accent);
+    }
+
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .category {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      padding: 8px 17px;
+      border-radius: 30px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+    }
+
+    .category.active,
+    .category:hover {
+      background: var(--text);
+      color: white;
+      border-color: var(--text);
+    }
+
+    .posts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .post {
+      background: var(--white);
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .post img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+    }
+
+    .post-content {
+      padding: 22px;
+    }
+
+    .post-category {
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .post h3 {
+      font-size: 22px;
+      margin: 10px 0;
+    }
+
+    .post p {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    .read-more {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .empty {
+      display: none;
+      color: var(--muted);
+      padding: 30px 0;
+    }
+
+    .about {
+      background: #f0ece5;
+      padding: 65px 24px;
+      text-align: center;
+    }
+
+    .about-content {
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .about p {
+      color: var(--muted);
+      margin-top: 18px;
+    }
+
+    footer {
+      padding: 30px 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 750px) {
+      nav {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .links {
+        gap: 18px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        margin: 40px auto;
+        gap: 25px;
+      }
+
+      .hero img {
+        height: 260px;
+      }
+
+      .posts {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .search {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a href="#" class="logo">sakysanma.</a>
+
+      <div class="links">
+        <a href="#inicio">Início</a>
+        <a href="#publicacoes">Blog</a>
+        <a href="#sobre">Sobre</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div>
+        <span class="eyebrow">Um espaço para ideias</span>
+        <h1>Palavras, ideias e inspirações.</h1>
+        <p>
+          Um cantinho para compartilhar pensamentos,
+          histórias, descobertas e tudo aquilo que
+          merece ser lembrado.
+        </p>
+        <a href="#publicacoes" class="button">
+          Explorar publicações
+        </a>
+      </div>
+
+      <img
+        src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1000"
+        alt="Ambiente aconchegante e inspirador"
+      >
+    </section>
+
+    <section class="section" id="publicacoes">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Nosso cantinho</span>
+          <h2>Últimas publicações</h2>
+        </div>
+
+        <input
+          class="search"
+          type="search"
+          id="search"
+          placeholder="Pesquisar artigos..."
+          aria-label="Pesquisar artigos"
+        >
+      </div>
+
+      <div class="categories">
+        <button class="category active" data-category="Todos">Todos</button>
+        <button class="category" data-category="Reflexões">Reflexões</button>
+        <button class="category" data-category="Inspiração">Inspiração</button>
+        <button class="category" data-category="Cotidiano">Cotidiano</button>
+      </div>
+
+      <div class="posts" id="posts">
+
+        <article class="post" data-category="Reflexões">
+          <img
+            src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=800"
+            alt="Café e momentos tranquilos"
+          >
+          <div class="post-content">
+            <span class="post-category">Reflexões</span>
+            <h3>A beleza das pequenas coisas</h3>
+            <p>
+              Às vezes, a felicidade mora nos detalhes
+              mais simples da nossa rotina.
+            </p>
+            <a href="#sobre" class="read-more">Continuar lendo →</a>
+          </div>
+        </article>
+
+        <article class="post" data-category="Inspiração">
+          <img
+            src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800"
+            alt="Caderno de anotações"
+          >
+          <div class="post-content">
+            <span class="post-category">Inspiração</span>
+            <h3>Todo dia é um novo começo</h3>
+            <p>
+              Recomeçar também é uma forma de
+              reconhecer o quanto podemos crescer.
+            </p>
+            <a href="#sobre" class="read-more">Continuar lendo →</a>
+          </div>
+        </article>
+
+        <article class="post" data-category="Cotidiano">
+          <img
+            src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800"
+            alt="Paisagem natural"
+          >
+          <div class="post-content">
+            <span class="post-category">Cotidiano</span>
+            <h3>Aprendendo a desacelerar</h3>
+            <p>
+              Nem tudo precisa acontecer depressa.
+              Existe beleza em respeitar nosso tempo.
+            </p>
+            <a href="#sobre" class="read-more">Continuar lendo →</a>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="empty" id="empty">
+        Nenhuma publicação encontrada.
+      </p>
+    </section>
+
+    <section class="about" id="sobre">
+      <div class="about-content">
+        <span class="eyebrow">Conheça o projeto</span>
+        <h2>Sobre o sakysanma</h2>
+        <p>
+          O sakysanma nasceu como um espaço para
+          compartilhar ideias, experiências e
+          inspirações. Um lugar onde cada palavra
+          tem seu tempo e cada história merece espaço.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 sakysanma. Todos os direitos reservados.</p>
+    <p>Feito com carinho.</p>
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll(".category");
+    const posts = document.querySelectorAll(".post");
+    const search = document.getElementById("search");
+    const empty = document.getElementById("empty");
+
+    let selectedCategory = "Todos";
+
+    function filterPosts() {
+      const term = search.value.toLowerCase();
+      let visible = 0;
+
+      posts.forEach(post => {
+        const category = post.dataset.category;
+        const content = post.innerText.toLowerCase();
+
+        const categoryMatch =
+          selectedCategory === "Todos" ||
+          category === selectedCategory;
+
+        const searchMatch = content.includes(term);
+
+        const show = categoryMatch && searchMatch;
+
+        post.style.display = show ? "block" : "none";
+
+        if (show) visible++;
+      });
+
+      empty.style.display = visible ? "none" : "block";
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        buttons.forEach(item => item.classList.remove("active"));
+
+        button.classList.add("active");
+        selectedCategory = button.dataset.category;
+
+        filterPosts();
+      });
+    });
+
+    search.addEventListener("input", filterPosts);
+  </script>
+
+</body>
+</html>
